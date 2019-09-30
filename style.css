@@ -2,6 +2,9 @@ body,
 html {
   height: 100%;
 }
+textarea {
+  font-family: monospace;
+}
 iframe {
   display: block;
   border: none;
