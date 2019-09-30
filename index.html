@@ -10,10 +10,16 @@
   <div class="container p-5">
     <div class="row">
       <div class="col-sm-4">
-        <textarea placeholder="Paste your css" id="css" cols="30" rows="10"></textarea>
+        <label for="">Paste CSS here
+          <textarea autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="body {...}" id="css" cols="30" rows="10"></textarea>
+        </label>
+        <label for="">Link to your CSS
+          <input class="w-100" type="text" placeholder="www.sitename.com/style.css">
+          <button onclick="getExternalCSS()">Load</button>
+        </label>
       </div>
       <div class="col-sm-8">
-        <iframe src="typo.html" frameborder="0" width="100%" height="100%"></iframe>
+        <iframe onload="setIframeHeight(this)" src="typo.html" scrolling="no" frameborder="0" width="100%" height="100%"></iframe>
       </div>
     </div>
   </div>
