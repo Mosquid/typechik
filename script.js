@@ -10,8 +10,16 @@ function dispatch(ctx, e) {
   ctx.postMessage(val, '*')
 }
 
-function setIframeHeight(iframe) {
-  iframe.style.height = iframe.contentWindow.document.body.scrollHeight + 'px'
+function setIframeHeight(e) {
+  const iframe = e.target
+  let height
+  
+  if (iframe instanceof Node) {
+    height = iframe.contentWindow.document.body.scrollHeight
+  } else {
+    height = iframe.document.body.scrollHeight
+  }
+  document.querySelector('iframe').style.height = height + 'px'
 }
 
 async function getExternalCSS() {
@@ -38,7 +46,11 @@ function initDOMEvents() {
   const textarea = document.querySelector('#css')
   const iframe = document.querySelector('iframe')
 
+  iframe.addEventListener('load', setIframeHeight)
+
   const cWin = iframe.contentWindow
 
-  textarea.addEventListener('change', dispatch.bind(null, cWin))
+  cWin.addEventListener('recalc', setIframeHeight)
+  for (let i of ['change', 'keyup', 'input', 'blur'])
+    textarea.addEventListener(i, dispatch.bind(null, cWin))
 }

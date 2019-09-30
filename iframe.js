@@ -6,6 +6,8 @@ function handleMessage(msg) {
   style.innerHTML = msg.data
   
   const evt = document.createEvent('Event')
-  evt.initEvent('load', false, false)
-  window.dispatchEvent(evt)
+  
+  setTimeout(function() {
+    dispatchEvent(new Event('recalc'));
+  }, 100)
 }
